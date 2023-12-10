@@ -11,3 +11,5 @@
 ![Screenshot (402)](https://github.com/gaddypavan/Techdome-frontend/assets/122382391/0784f992-8b91-4c06-b846-7a8664a83c68)
 ![Screenshot (409)](https://github.com/gaddypavan/Techdome-frontend/assets/122382391/48a949b3-479c-4fc9-b69a-fd478992a63c)
 ![Screenshot (410)](https://github.com/gaddypavan/Techdome-frontend/assets/122382391/5207180e-8a43-4187-a2fb-fc5b892d0998)
+# SUCCESSFULLY Deployed the image
+![Screenshot (414)](https://github.com/gaddypavan/Techdome-frontend/assets/122382391/cf97d645-47fd-4415-92db-1b597477642d)
