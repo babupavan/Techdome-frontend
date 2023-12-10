@@ -29,12 +29,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-        
-      - name: Set up Docker
-        uses: actions/setup-docker@v2
 
       - name: Build Docker Image
-        run: docker build -t gpavankumarreddy/techdome:latest .
+        run: docker build -t gpavankumarreddy1/techdome:latest .
 
       - name: Run Docker Container
-        run: docker run -d -p 8081:3000 gpavankumarreddy/techdome:latest
+        run: docker run -d -p 8081:8080 gpavankumarreddy1/techdome:latest
