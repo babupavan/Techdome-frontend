@@ -17,6 +17,8 @@ jobs:
           node-version: '14'
       - name: Install Dependencies
         run: npm install
+      - name: to test the code with sonar
+        run: node sonarqube-scanner.js
 
   docker:
     needs: build
