@@ -27,10 +27,10 @@ jobs:
       - name: Log in to Docker Hub
         run:  sudo docker login -u gpavankumarreddy -p Devops@1998
       - name: Build Docker Image
-        run: docker build -t gpavankumarreddy98/techdome:latest .
+        run: sudo docker build -t gpavankumarreddy98/techdome:latest .
       - name: Change the name
-        run: docker tag gpavankumarreddy98/techdome:latest gpavankumarreddy/babu:techdomeimage98
+        run: sudo docker tag gpavankumarreddy98/techdome:latest gpavankumarreddy/babu:techdomeimage98
       - name: Push Docker Image to Docker Hub
-        run: docker push gpavankumarreddy/babu:techdomeimage98
+        run: sudo docker push gpavankumarreddy/babu:techdomeimage98
       - name: Run Docker Container
-        run: docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage98
+        run: sudo docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage98
