@@ -33,7 +33,7 @@ jobs:
         uses: docker/setup-docker@v2.10.0
 
       - name: Build Docker Image
-        run: docker build -t gpavankumarreddy/techdome:latest .
+        run: sudo docker build -t gpavankumarreddy/techdome:latest .
 
       - name: Run Docker Container
-        run: docker run -d -p 8081:3000 gpavankumarreddy/techdome:latest
+        run: sudo docker run -d -p 8081:3000 gpavankumarreddy/techdome:latest
