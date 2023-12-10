@@ -23,13 +23,16 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-      - name: Build Docker Image
-        run: sudo docker build -t gpavankumarreddy10/techdome:latest .
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       - name: Log in to Docker Hub
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build Docker Image
+        run: sudo docker build -t gpavankumarreddy98/techdome:latest .
       - name: change the name
-        run: docker tag gpavankumarreddy10/techdome:latest gpavankumarreddy/babu:techdomeimage1
+        run: docker tag gpavankumarreddy98/techdome:latest gpavankumarreddy/babu:techdomeimage98
       - name: Push Docker Image to Docker Hub
-        run: docker push gpavankumarreddy/babu:techdomeimage1
+        run: docker push gpavankumarreddy/babu:techdomeimage98
       - name: Run Docker Container
-        run: sudo docker run -d -p 8081:3000 gpavankumarreddy123/techdome:latest
+        run: sudo docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage98
