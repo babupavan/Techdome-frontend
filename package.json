@@ -29,6 +29,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    "coverage": "react-scripts test --coverage",
+    "test-sonar": "react-scripts test --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
+    "sonar": "node sonarqube-scanner.js"
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +50,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  }
+    "devDependencies": {
+    "jest-sonar-reporter": "^2.0.0",
+    "sonarqube-scanner": "^2.8.2"
   }
 }
