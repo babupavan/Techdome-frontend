@@ -38,7 +38,7 @@ jobs:
       - name: Test with SonarQube
         run: node sonarqube-scanner.js
 
-  docker:
+  deploy-container:
     needs: test
     runs-on: self-hosted
     steps:
