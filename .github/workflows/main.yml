@@ -25,7 +25,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | sudo docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+        run:  sudo docker login -u gpavankumarreddy -p Devops@1998
       - name: Build Docker Image
         run: docker build -t gpavankumarreddy98/techdome:latest .
       - name: Change the name
