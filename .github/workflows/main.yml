@@ -25,6 +25,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
       - name: Build Docker Image
-        run: sudo docker build -t gpavankumarreddy1/techdome:latest .
+        run: sudo docker build -t gpavankumarreddy12/techdome:latest .
       - name: Run Docker Container
-        run: sudo docker run -d -p 8081:8080 gpavankumarreddy1/techdome:latest
+        run: sudo docker run -d -p 8081:3000 gpavankumarreddy12/techdome:latest
