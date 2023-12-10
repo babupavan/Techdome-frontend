@@ -12,7 +12,7 @@ scanner(
             "sonar.test.inclusions": "**/*.test.tsx,**/*.test.ts",
             "sonar.exclusions": "**/*.test.tsx",
             "sonar.tests":"./src",
-            "sonar.testExecutionReportPaths":"test-report.xml",
+            "sonar.testExecutionReportPaths": "test-report.xml",
             "sonar.javascript.lcov.reportPaths":"coverage/lcov.info"
         },
     },
