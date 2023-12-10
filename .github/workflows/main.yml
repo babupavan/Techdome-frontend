@@ -17,22 +17,20 @@ jobs:
           node-version: '14'
       - name: Install Dependencies
         run: npm install
+
   docker:
     needs: build
     runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       - name: Log in to Docker Hub
-        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
       - name: Build Docker Image
-        run: sudo docker build -t gpavankumarreddy98/techdome:latest .
-      - name: change the name
+        run: docker build -t gpavankumarreddy98/techdome:latest .
+      - name: Change the name
         run: docker tag gpavankumarreddy98/techdome:latest gpavankumarreddy/babu:techdomeimage98
       - name: Push Docker Image to Docker Hub
         run: docker push gpavankumarreddy/babu:techdomeimage98
       - name: Run Docker Container
-        run: sudo docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage98
+        run: docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage98
