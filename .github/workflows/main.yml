@@ -1,4 +1,4 @@
-name: Build, Push, and Run with Docker
+name: Build, Test, and Deploy with Docker
 
 on:
   push:
@@ -11,28 +11,51 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '14'
+
       - name: Install Dependencies
         run: npm install
-      - name: to test the code with sonar
-        run: node sonarqube-scanner.js
 
-  docker:
+  test:
     needs: build
     runs-on: self-hosted
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Test with SonarQube
+        run: node sonarqube-scanner.js
+
+  docker:
+    needs: test
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
       - name: Log in to Docker Hub
-        run:  sudo docker login -u gpavankumarreddy -p Devops@1998
+        run: sudo docker login -u gpavankumarreddy -p Devops@1998
+
       - name: Build Docker Image
-        run: sudo docker build -t gpavankumarreddy98/techdome:latest .
-      - name: Change the name
-        run: sudo docker tag gpavankumarreddy98/techdome:latest gpavankumarreddy/babu:techdomeimage98
+        run: sudo docker build -t gpavankumarreddy/babu:techdomeimage98 .
+
+      - name: Tag Docker Image
+        run: sudo docker tag gpavankumarreddy/babu:techdomeimage98 gpavankumarreddy/babu:techdomeimage98
+
       - name: Push Docker Image to Docker Hub
         run: sudo docker push gpavankumarreddy/babu:techdomeimage98
+
       - name: Run Docker Container
         run: sudo docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage98
