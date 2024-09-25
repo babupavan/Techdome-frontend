@@ -1,9 +1,9 @@
-name: Build, Test, and Deploy with Docker
+name: Build and Test with SonarQube
 
 on:
   push:
     branches:
-      - main
+      - TRIGENT
 
 jobs:
   build:
@@ -20,42 +20,16 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-  test:
-    needs: build
-    runs-on: self-hosted
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - name: Run Build
+        run: npm run build  
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Test with SonarQube
-        run: node sonarqube-scanner.js
-
-  deploy-container:
-    needs: test
-    runs-on: self-hosted
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Log in to Docker Hub
-        run: sudo docker login -u gpavankumarreddy -p Devops@1998
-
-      - name: Build Docker Image
-        run: sudo docker build -t gpavankumarreddy1/babu:techdomeimage981 .
-
-      - name: Tag Docker Image
-        run: sudo docker tag gpavankumarreddy1/babu:techdomeimage981 gpavankumarreddy/babu:techdomeimage982
-
-      - name: Push Docker Image to Docker Hub
-        run: sudo docker push gpavankumarreddy/babu:techdomeimage982
-
-      - name: Run Docker Container
-        run: sudo docker run -d -p 8081:3000 gpavankumarreddy/babu:techdomeimage982
+      - name: Run SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+        run: |
+          npx sonar-scanner \
+            -Dsonar.projectKey=Techdome-frontend \
+            -Dsonar.organization=TRIGENT \
+            -Dsonar.host.url=http://13.201.8.107:9000 \
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.sources=.
